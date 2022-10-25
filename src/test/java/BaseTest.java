@@ -13,6 +13,7 @@ public class BaseTest {
 
     static WebDriver driver;
     static String url;
+
    public static void browserConfigs() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(url);
