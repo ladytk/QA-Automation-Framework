@@ -11,14 +11,14 @@ public class Hw17 extends BaseTest {
         clickSubmitBtn();
         Thread.sleep(5000);
         allSongsTab();
-        songChoice();
+        addingNewSong();
         addSongToPlaylistBtn();
         abdisPlaylist();
         validation();
         tearDownBrowser();
 
         allSongsTab();
-        songChoice();
+        addingNewSong();
         addSongToPlaylistBtn();
         abdisPlaylist();
         validation();

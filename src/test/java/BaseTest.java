@@ -74,7 +74,7 @@ public class BaseTest {
         Thread.sleep(2000);
     }
 
-    protected static void songChoice() throws InterruptedException {
+    protected static void addingNewSong() throws InterruptedException {
 
         WebElement choiceOfSong = driver.findElement(By.xpath("//tr[@class='song-item']//td[contains(text(),'Epic Song')]"));
         choiceOfSong.click();
