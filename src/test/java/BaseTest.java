@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -84,6 +85,25 @@ public class BaseTest {
     protected static void allSongsTab() throws InterruptedException {
         WebElement songsTab = driver.findElement(By.xpath("//a[@class='songs']"));
         songsTab.click();
+        Thread.sleep(2000);
+    }
+
+    protected static void songBeginsToPlay() throws InterruptedException {
+        WebElement songPlays = driver.findElement(By.xpath("//*[@id=\"progressPane\"]/h3"));
+        Assert.assertTrue(songPlays.isDisplayed());
+        Thread.sleep(2000);
+    }
+
+    protected static void songSelection() throws InterruptedException {
+        Actions act = new Actions(driver);
+        WebElement songSelected = driver.findElement(By.xpath("//*[@id=\"recentlyPlayedWrapper\"]/div/div/div[1]/table/tr[1]/td[2]"));
+        act.doubleClick(songSelected).perform();
+        Thread.sleep(2000);
+    }
+
+    protected static void recentlyPlayedTab() throws InterruptedException {
+        WebElement recentlyPlayed = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[2]/a"));
+        recentlyPlayed.click();
         Thread.sleep(2000);
     }
 
