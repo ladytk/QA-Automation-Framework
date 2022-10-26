@@ -17,10 +17,5 @@ public class Hw17 extends BaseTest {
         validation();
         tearDownBrowser();
 
-        allSongsTab();
-        addingNewSong();
-        addSongToPlaylistBtn();
-        abdisPlaylist();
-        validation();
     }
 }

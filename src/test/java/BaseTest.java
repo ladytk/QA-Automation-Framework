@@ -53,7 +53,7 @@ public class BaseTest {
 
     protected static void validation() throws InterruptedException {
 
-        WebElement myPlaylist = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
+        WebElement myPlaylist = driver.findElement(By.cssSelector("a[href*='playlist/24815']"));
         myPlaylist.click();
         Thread.sleep(2000);
         WebElement songWasAdded = driver.findElement(By.xpath("//tr[@class='song-item']//td[contains(text(),'Epic Song')]"));
@@ -69,7 +69,7 @@ public class BaseTest {
 
     protected static void addSongToPlaylistBtn() throws InterruptedException {
 
-        WebElement addingTheSong = driver.findElement(By.xpath("//button[@title='Add selected songs to…']"));
+        WebElement addingTheSong = driver.findElement(By.xpath("//button[@class='btn-add-to']"));
         addingTheSong.click();
         Thread.sleep(2000);
     }
@@ -83,7 +83,6 @@ public class BaseTest {
 
     protected static void allSongsTab() throws InterruptedException {
         WebElement songsTab = driver.findElement(By.xpath("//a[@class='songs']"));
-        songsTab.click();
         songsTab.click();
         Thread.sleep(2000);
     }
