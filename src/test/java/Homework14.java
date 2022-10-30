@@ -43,7 +43,6 @@ public class Homework14 {
         Assert.assertEquals(driver.getCurrentUrl(), url);
 
         WebElement registrationButton = driver.findElement(By.xpath("//a[@href='/registration.php']"));
-        //WebElement registrationButton = driver.findElement(By.linkText("https://bbb.testpro.io/registration.php"));
         registrationButton.click();
 
         Thread.sleep(5000);
