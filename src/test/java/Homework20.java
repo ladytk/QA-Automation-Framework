@@ -2,6 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -10,10 +12,10 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework19 {
-    
+public class Homework20 {
+
     @Test
-    public void deletePlaylist() throws InterruptedException {
+    public void deletePlaylist() {
         playlistSelect();
         deletePlaylistButton();
         validateDeleted();
@@ -25,10 +27,12 @@ public class Homework19 {
         Assert.assertTrue(validateDeleted.isDisplayed());
     }
 
-    private void deletePlaylistButton() throws InterruptedException {
-        WebElement deletePlaylistButton = driver.findElement(By.xpath("//button[@class='del btn-delete-playlist']"));
+    private void deletePlaylistButton()  {
+        String xpaths = ("//button[@class='del btn-delete-playlist']");
+        WebElement deletePlaylistButton = driver.findElement(By.xpath(xpaths));
         deletePlaylistButton.click();
-        Thread.sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpaths)));
     }
 
     private void playlistSelect() {
@@ -40,11 +44,10 @@ public class Homework19 {
     WebDriver driver;
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL) throws InterruptedException {
+    public void launchBrowser(String BaseURL) {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        String url = BaseURL;
-        driver.get(url);
+        driver.get(BaseURL);
 
         WebElement emailBox = driver.findElement(By.cssSelector("[type='email']"));
         emailBox.click();
@@ -56,15 +59,15 @@ public class Homework19 {
 
         WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
         submitButton.click();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='homeWrapper']//div[@class='heading-wrapper']")));
     }
     @AfterMethod
-    public void closeBrowser() throws InterruptedException {
-        Thread.sleep(5000);
+    public void closeBrowser() {
         driver.quit();
     }
 }
-//    Create a new file Homework19.java file with @Test annotation in IntelliJ IDEA
+//    Create a new file Homework20.java file with @Test annotation in IntelliJ IDEA
 //        Create a test case deletePlaylist() using @Test annotations
 //        Use the helper/reusable methods we created
 //        Use @Parameters for passing baseUrl from the TestNG config file to the tests
