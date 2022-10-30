@@ -3,21 +3,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.*;
 import java.time.Duration;
 
 public class BaseTest {
     static WebDriver driver;
     static String url;
+    static WebDriverWait wait;
    public static void browserConfigs() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
         driver.get(url);
         url = "https://bbb.testpro.io/";
         driver.manage().window().maximize();
+        provideEmail("dcabdi@gmail.com");
+        providePassword("te$t$tudent");
     }
     @DataProvider(name = "InvalidCredentials")
     public static Object [][] getDataFromDataProviders(){
@@ -27,7 +29,6 @@ public class BaseTest {
                 {"" , ""}
         };
     }
-
     protected static void playlistWasDeleted() throws InterruptedException {
 
         WebElement deletedAlert = driver.findElement(By.xpath("//div[@class='alertify-logs top right']"));
@@ -35,20 +36,19 @@ public class BaseTest {
     }
     protected static void playlistDeleteBtn() throws InterruptedException {
 
-    WebElement deletePlaylist = driver.findElement(By.xpath("//button[@title='Delete this playlist']"));
-    deletePlaylist.click();
-    Thread.sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Delete this playlist']"))).click();
     }
     protected static void playlistToDelete() throws InterruptedException {
 
-        WebElement playlistName = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[4]/a"));
-        playlistName.click();
-        Thread.sleep(2000);
+       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='#!/playlist/26571']"))).click();
     }
     @BeforeMethod
+    @Parameters({"BaseUrl"})
     public void launchBrowser() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         url = "https://bbb.testpro.io/";
         driver.get(url);
     }
@@ -75,54 +75,54 @@ public class BaseTest {
     }
     protected static void validation() throws InterruptedException {
 
-        WebElement myPlaylist = driver.findElement(By.cssSelector("a[href*='playlist/24815']"));
-        myPlaylist.click();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("a[href*='playlist/24815']"))).click();
         WebElement songWasAdded = driver.findElement(By.xpath("//tr[@class='song-item']//td[contains(text(),'Epic Song')]"));
         Assert.assertTrue(songWasAdded.isDisplayed());
     }
     protected static void abdisPlaylist() throws InterruptedException {
 
-        WebElement myPlaylist = driver.findElement(By.xpath("//section[@id='songsWrapper']//li[5]"));
-        myPlaylist.click();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//section[@id='songsWrapper']//li[5]"))).click();
     }
     protected static void addSongToPlaylistBtn() throws InterruptedException {
 
-        WebElement addingTheSong = driver.findElement(By.xpath("//button[@class='btn-add-to']"));
-        addingTheSong.click();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn-add-to']"))).click();
     }
     protected static void addingNewSong() throws InterruptedException {
 
-        WebElement choiceOfSong = driver.findElement(By.xpath("//tr[@class='song-item']//td[contains(text(),'Epic Song')]"));
-        choiceOfSong.click();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[@class='song-item']//td[contains(text(),'Epic Song')]"))).click();
     }
     protected static void allSongsTab() throws InterruptedException {
-        WebElement songsTab = driver.findElement(By.xpath("//a[@class='songs']"));
-        songsTab.click();
-        Thread.sleep(2000);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='songs']"))).click();
     }
     protected static void songBeginsToPlay() throws InterruptedException {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-testid='sound-bar-play']"))).click();
         WebElement soundBarPlaySong = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
         Assert.assertTrue(soundBarPlaySong.isDisplayed());
-        Thread.sleep(2000);
     }
     protected static void songSelection() throws InterruptedException {
+
         Actions act = new Actions(driver);
         WebElement songSelected = driver.findElement(By.xpath("//*[@id=\"recentlyPlayedWrapper\"]/div/div/div[1]/table/tr[1]/td[2]"));
         act.doubleClick(songSelected).perform();
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
     protected static void recentlyPlayedTab() throws InterruptedException {
-        WebElement recentlyPlayed = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[2]/a"));
-        recentlyPlayed.click();
-        Thread.sleep(2000);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"playlists\"]/ul/li[2]/a"))).click();
     }
     public void clickAvatarIcon() {
-        WebElement avatarIcon = BaseTest.driver.findElement(By.xpath("//img[contains(@alt,'Avatar of')]"));
-        avatarIcon.click();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[contains(@alt,'Avatar of')]"))).click();
     }
     @AfterMethod
     public static void tearDownBrowser() {
