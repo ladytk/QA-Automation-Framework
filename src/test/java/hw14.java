@@ -7,11 +7,12 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class hw14 {
+public class hw14 extends BaseTest{
 
-    @Test
+    @Test(priority = 2)
     public static void RegistrationPage () throws InterruptedException {
         WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
         try {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             String url = "https://bbb.testpro.io/";

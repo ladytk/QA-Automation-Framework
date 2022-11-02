@@ -2,7 +2,7 @@ import org.testng.annotations.Test;
 
 public class Hw17 extends BaseTest {
 
-    @Test(description = " Adding a song to Abdi's Playlist ")
+    @Test(priority = 1,description = " Adding a song to Abdi's Playlist ")
     public static void addSongToPlaylist() throws InterruptedException  {
 
         browserConfigs();

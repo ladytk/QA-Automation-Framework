@@ -1,21 +1,41 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
+public class LoginTests extends BaseTest {
+    @Test(enabled = false, priority = 0, description = "changing the username")
+    public void changeUsernameVerifyTheChange() throws InterruptedException {
 
-public class LoginTests {
+        browserConfigs();
+        provideEmail("dcabdi@gmail.com");
+        providePassword("te$t$tudent");
+        clickSubmitBtn();
+        clickAvatarIcon();
 
-    @Test
-    public static void LoginEmptyEmailPasswordTest () {
+        WebElement currentPassword = driver.findElement(By.xpath("//input[@name='current_password']"));
+        currentPassword.sendKeys("te$t$tudent");
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WebElement username= driver.findElement(By.xpath("//input[@name='name']"));
+        username.clear();
+        username.sendKeys("Abdi");
+        Thread.sleep(1000);
+        WebElement usernameActual = driver.findElement(By.xpath("//span[@class='name']"));
+        WebElement saveBtn = driver.findElement(By.xpath("//button[normalize-space()='Save']"));
+        saveBtn.click();
+        Assert.assertTrue(usernameActual.isDisplayed());
+        Thread.sleep(3000);
+        tearDownBrowser();
+    }
+    @Test(enabled = true, priority = 1) //( priority = 1, description = "Login w/ a valid email", dataProvider = "InvalidCredentials", dataProviderClass = BaseTest.class)
 
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    public static void LoginValidEmailPasswordTest () {
+    provideEmail("dcabdi@gmail.com");
+    providePassword("te$t$tudent");
+    clickSubmitBtn();
+
+    WebElement avatarIcon = driver.findElement(By.xpath("//img[contains(@alt,'Avatar of')]"));
+    Assert.assertTrue(avatarIcon.isDisplayed());
+    driver.quit();
     }
 }

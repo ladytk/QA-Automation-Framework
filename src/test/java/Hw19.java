@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 public class Hw19 extends BaseTest{
 
-@Test(priority = 1, description = "Deleting A Playlist and Validating")
+@Test(priority = 0, description = "Deleting A Playlist and Validating")
 @Parameters({"baseurl"})
     public static void deletePlaylist() throws InterruptedException {
 

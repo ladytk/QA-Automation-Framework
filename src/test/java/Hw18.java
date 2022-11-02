@@ -1,9 +1,13 @@
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class Hw18 extends BaseTest{
 
-    @Test(priority = 1, description = "Playing a Song & Validating")
-    public static void playSong() throws InterruptedException{
+
+    @Test(priority = 0, description = "Playing a Song & Validating")
+    @Parameters({"baseURL"})
+    public static void playSong(String baseURL) throws InterruptedException{
 
         browserConfigs();
         provideEmail("dcabdi@gmail.com");
@@ -16,5 +20,4 @@ public class Hw18 extends BaseTest{
         Thread.sleep(2000);
         tearDownBrowser();
     }
-
 }
