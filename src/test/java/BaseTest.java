@@ -13,6 +13,7 @@ public class BaseTest {
     static WebDriver driver;
     static String url;
     static WebDriverWait wait;
+    static Actions actions;
    public static void browserConfigs() {
 
         driver.get(url);
