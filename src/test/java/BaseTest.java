@@ -14,7 +14,8 @@ public class BaseTest {
     static String url;
     static WebDriverWait wait;
     static Actions actions;
-   public static void browserConfigs() {
+   
+    public static void browserConfigs() {
 
         driver.get(url);
         url = "https://bbb.testpro.io/";
