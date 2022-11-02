@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,14 +11,15 @@ import org.testng.annotations.*;
 import java.time.Duration;
 
 public class BaseTest {
-    static WebDriver driver;
-    static String url;
-    static WebDriverWait wait;
-    static Actions actions;
-   
+    public static WebDriver driver;
+    public static String url;
+    public static WebDriverWait wait;
+    public static Actions action;
+
     public static void browserConfigs() {
 
         driver.get(url);
+        action = new Actions(driver);
         url = "https://bbb.testpro.io/";
         driver.manage().window().maximize();
         provideEmail("dcabdi@gmail.com");
@@ -31,20 +33,37 @@ public class BaseTest {
                 {"" , ""}
         };
     }
-    protected static void playlistWasDeleted() throws InterruptedException {
+    protected static void playlistWasDeleted() {
 
         WebElement deletedAlert = driver.findElement(By.xpath("//div[@class='alertify-logs top right']"));
         Assert.assertTrue(deletedAlert.isDisplayed());
     }
-    protected static void playlistDeleteBtn() throws InterruptedException {
+    protected static void playlistDeleteBtn() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Delete this playlist']"))).click();
     }
-    protected static void playlistToDelete() throws InterruptedException {
+    protected static void playlistToDelete() {
 
        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='#!/playlist/26571']"))).click();
+    }
+    public static boolean isSongPlaying() {
+
+        WebElement soundBarVisualizer = driver.findElement(By.cssSelector(".playback"));
+        return soundBarVisualizer.isDisplayed();
+    }
+    public static void choosePlay() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playback"))).click();
+    }
+    public static void getContextMenu() {
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
+        WebElement firstSong = driver.findElement(By.cssSelector(".all-songs tr.song-item:nth-child(1)"));
+        action.contextClick(firstSong).perform();
+    }
+    public static void chooseAllSongsList() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
     }
     @BeforeMethod
     @Parameters({"BaseUrl"})
@@ -109,14 +128,14 @@ public class BaseTest {
         WebElement soundBarPlaySong = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
         Assert.assertTrue(soundBarPlaySong.isDisplayed());
     }
-    protected static void songSelection() throws InterruptedException {
+    protected static void songSelection() {
 
         Actions act = new Actions(driver);
         WebElement songSelected = driver.findElement(By.xpath("//*[@id=\"recentlyPlayedWrapper\"]/div/div/div[1]/table/tr[1]/td[2]"));
         act.doubleClick(songSelected).perform();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
-    protected static void recentlyPlayedTab() throws InterruptedException {
+    protected static void recentlyPlayedTab()  {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"playlists\"]/ul/li[2]/a"))).click();
@@ -129,6 +148,35 @@ public class BaseTest {
     @AfterMethod
     public static void tearDownBrowser() {
         driver.quit();
+    }
+    public WebElement hoverPlay() {
+        WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+        action.moveToElement(play).perform();
+        return driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+    }
+    public boolean doesPlaylistExist() {
+
+        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='Summer Songs']"));
+        return playlistElement.isDisplayed();
+    }
+    public void enterPlaylistName() {
+
+        WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
+        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
+        playlistInputField.sendKeys("Summer Songs");
+        playlistInputField.sendKeys(Keys.ENTER);
+    }
+    public void choosePlaylist() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(4)")));
+    }
+    public void doubleClickChoosePlaylist() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(4)")));
+        WebElement webElement = driver.findElement(By.cssSelector(".playlist:nth-child(4)"));
+        action.moveToElement(webElement).perform();
     }
 }
 
