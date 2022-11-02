@@ -15,7 +15,6 @@ public class Hw21 extends BaseTest {
         choosePlay();
         Assert.assertTrue(isSongPlaying());
     }
-
     @Test(priority = 2, description = "Hover, Play, and Validate")
     @Parameters({"BaseUrl"})
     public void hoverOverPlayButton() {
@@ -26,7 +25,6 @@ public class Hw21 extends BaseTest {
         hoverPlay();
         Assert.assertTrue(hoverPlay().isDisplayed());
     }
-
     @Test(priority = 3, description = "Editing Playlist Name and Validating")
     @Parameters({"BaseUrl"})
     public void renamePlaylist()  {
@@ -37,6 +35,7 @@ public class Hw21 extends BaseTest {
         choosePlaylist();
         enterPlaylistName();
         doesPlaylistExist();
+        
     }
 }
 
