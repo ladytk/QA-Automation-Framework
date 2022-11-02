@@ -37,8 +37,8 @@ public class Hw15 {
             WebElement searchIcon = driver.findElement(By.cssSelector("[type = 'search']"));
             searchIcon.click();
             searchIcon.sendKeys("Pluto");
-            String searchUrl = "https://bbb.testpro.io/#!/search";
-            Assert.assertEquals(driver.getCurrentUrl(), searchUrl);
+            WebElement searchResult = driver.findElement(By.cssSelector("………….."));
+            Assert.assertEquals(searchResult.getText(),"Pluto" );
             Thread.sleep(2000);
         } finally {
             Thread.sleep(5000);
