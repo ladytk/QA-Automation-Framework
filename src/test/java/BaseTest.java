@@ -145,10 +145,6 @@ public class BaseTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[contains(@alt,'Avatar of')]"))).click();
     }
-    @AfterMethod
-    public static void tearDownBrowser() {
-        driver.quit();
-    }
     public WebElement hoverPlay() {
         WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
         action.moveToElement(play).perform();
@@ -178,5 +174,10 @@ public class BaseTest {
         WebElement webElement = driver.findElement(By.cssSelector(".playlist:nth-child(4)"));
         action.moveToElement(webElement).perform();
     }
+    @AfterMethod
+    public static void tearDownBrowser() {
+        driver.quit();
+    }
 }
+
 
