@@ -50,7 +50,7 @@ public class BaseTest {
     }
     public static boolean isSongPlaying() {
 
-        WebElement soundBarVisualizer = driver.findElement(By.cssSelector(".playback"));
+        WebElement soundBarVisualizer = driver.findElement(By.xpath("//button[@title='Click for a marvelous visualizer!']"));
         return soundBarVisualizer.isDisplayed();
     }
     public static void choosePlay() {
@@ -63,7 +63,7 @@ public class BaseTest {
         action.contextClick(firstSong).perform();
     }
     public static void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.songs"))).click();
     }
     @BeforeMethod
     @Parameters({"BaseUrl"})
@@ -158,21 +158,22 @@ public class BaseTest {
     public void enterPlaylistName() {
 
         WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
-        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
+        playlistInputField.sendKeys((Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE)));
         playlistInputField.sendKeys("Summer Songs");
         playlistInputField.sendKeys(Keys.ENTER);
     }
     public void choosePlaylist() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(4)")));
     }
     public void doubleClickChoosePlaylist() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(4)")));
         WebElement webElement = driver.findElement(By.cssSelector(".playlist:nth-child(4)"));
-        action.moveToElement(webElement).perform();
+        action.doubleClick(webElement).perform();
     }
     @AfterMethod
     public static void tearDownBrowser() {
