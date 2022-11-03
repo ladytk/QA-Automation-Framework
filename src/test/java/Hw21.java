@@ -36,5 +36,6 @@ public class Hw21 extends BaseTest {
         enterPlaylistName();
         Assert.assertTrue(doesPlaylistExist());
     }
+
 }
 

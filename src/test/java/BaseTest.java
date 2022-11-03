@@ -16,6 +16,8 @@ public class BaseTest {
     public static WebDriverWait wait;
     public static Actions action;
 
+
+
     public static void browserConfigs() {
 
         driver.get(url);
@@ -158,26 +160,35 @@ public class BaseTest {
     public void enterPlaylistName() {
 
         WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
-        playlistInputField.sendKeys((Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE)));
+        waitForVisibilityOfElement(playlistInputField);
+        playlistInputField.sendKeys((Keys.chord(Keys.CONTROL + "a", Keys.BACK_SPACE)));
         playlistInputField.sendKeys("Summer Songs");
         playlistInputField.sendKeys(Keys.ENTER);
     }
     public void choosePlaylist() {
 
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(4)")));
+        WebElement playlist = driver.findElement(By.cssSelector(".playlist:nth-child(4)"));
+        waitForElementToBeClickable(playlist);
     }
     public void doubleClickChoosePlaylist() {
 
-
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(4)")));
         WebElement webElement = driver.findElement(By.cssSelector(".playlist:nth-child(4)"));
-        action.doubleClick(webElement).perform();
+        waitForElementToBeClickable(webElement);
+        new Actions(driver).doubleClick(webElement).perform();
+    }
+    protected void waitForElementToBeClickable(WebElement webElementLocator) {
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions
+                .elementToBeClickable(webElementLocator));
+    }
+    protected void waitForVisibilityOfElement(WebElement webElementLocator) {
+
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions
+                .visibilityOf(webElementLocator));
     }
     @AfterMethod
     public static void tearDownBrowser() {
         driver.quit();
+        driver = null;
     }
 }
 

@@ -1,9 +1,12 @@
+import POM.pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
+
     @Test(enabled = false, priority = 0, description = "changing the username")
     public void changeUsernameVerifyTheChange() throws InterruptedException {
 
@@ -30,12 +33,13 @@ public class LoginTests extends BaseTest {
     @Test(enabled = true, priority = 1) //( priority = 1, description = "Login w/ a valid email", dataProvider = "InvalidCredentials", dataProviderClass = BaseTest.class)
 
     public static void LoginValidEmailPasswordTest () {
-    provideEmail("dcabdi@gmail.com");
-    providePassword("te$t$tudent");
-    clickSubmitBtn();
+        LoginPage loginPage = new LoginPage(driver);
 
-    WebElement avatarIcon = driver.findElement(By.xpath("//img[contains(@alt,'Avatar of')]"));
-    Assert.assertTrue(avatarIcon.isDisplayed());
-    driver.quit();
+        loginPage.provideEmail();
+        loginPage.providePassword();
+        loginPage.clickSubmitBtn();
+
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));
+        Assert.assertTrue(avatarIcon.isDisplayed());
     }
 }
