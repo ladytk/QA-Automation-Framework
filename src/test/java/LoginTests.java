@@ -1,9 +1,14 @@
+import POM.pages.BasePage;
+import POM.pages.HomePage;
 import POM.pages.LoginPage;
+import POM.pages.SongsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
@@ -22,24 +27,68 @@ public class LoginTests extends BaseTest {
         WebElement username= driver.findElement(By.xpath("//input[@name='name']"));
         username.clear();
         username.sendKeys("Abdi");
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         WebElement usernameActual = driver.findElement(By.xpath("//span[@class='name']"));
         WebElement saveBtn = driver.findElement(By.xpath("//button[normalize-space()='Save']"));
         saveBtn.click();
         Assert.assertTrue(usernameActual.isDisplayed());
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         tearDownBrowser();
     }
-    @Test(enabled = true, priority = 1) //( priority = 1, description = "Login w/ a valid email", dataProvider = "InvalidCredentials", dataProviderClass = BaseTest.class)
-
+    @Test(enabled = true, priority = 1)
     public static void LoginValidEmailPasswordTest () {
+
         LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-        loginPage.provideEmail();
-        loginPage.providePassword();
+        loginPage.provideEmail("dcabdi@gmail.com");
+        loginPage.providePassword("te$t$tudent");
         loginPage.clickSubmitBtn();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Assert.assertTrue(homePage.isUserAvatarDisplayed());
+    }
+    @Test
+    public void PlayASongFromAllSongs() {
 
-        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));
-        Assert.assertTrue(avatarIcon.isDisplayed());
+        LoginPage loginpage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        SongsPage songsPage = new SongsPage(driver);
+
+        loginpage.login();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        homePage.clickOnAllSongs();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        songsPage.doubleClickFirstSong();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        Assert.assertTrue(homePage.isSongPlaying());
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
