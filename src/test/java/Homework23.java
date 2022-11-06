@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework22 extends BaseTest{
+public class Homework23 extends BaseTest{
 
 
     @Test
@@ -15,9 +15,10 @@ public class Homework22 extends BaseTest{
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
-        loginPage.provideEmail("tasiakwiggins@gmail.com");
-        loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmitButton();
+        loginPage.provideEmail("tasiakwiggins@gmail.com")
+                .providePassword("te$t$tudent")
+                .clickSubmitButton();
+
         Assert.assertTrue(homePage.isUserAvatarDisplayed());
 
         doubleclickPlaylist();
@@ -44,16 +45,11 @@ public class Homework22 extends BaseTest{
         By playlistSelection = By.cssSelector("li.playlist:nth-child(3)");
         WebElement doubleClicking = driver.findElement(playlistSelection);
         actions.doubleClick(doubleClicking).perform();
-
     }
-
-
 }
 
-//    Create a new file Homework22.java file with @Test annotation in IntelliJ IDEA
-//        Refactor your code, implement Page Objects
-//        Refactor your tests with POM
-//        Create a new branch and commit your changes
-//        Push your code to a remote repository
-//        Create a pull request
-//        Copy and paste the link of the pull request (or your branch) to the field below, so we can check your homework
+//Refactor your code, implement Page Factory and Fluent Interfaces (optional)
+//Create a new branch and commit your changes
+//Push your code to a remote repository
+//Create a pull request
+//Copy and paste the link of the pull request (or your branch) to the field below, so we can check your homework

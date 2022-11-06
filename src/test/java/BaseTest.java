@@ -1,7 +1,4 @@
-import POM.pages.LoginPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,26 +37,5 @@ public class BaseTest {
 
         driver.quit();
     }
-//    public void clickSubmitButton() {
-//        WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
-//        submitButton.click();
-//    }
-
-//    public void provideEmail(String email) {
-//        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-//        emailField.click();
-//        emailField.sendKeys(email);
-//    }
-//
-//    public void providePassword(String password) {
-//        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
-//        passwordField.click();
-//        passwordField.sendKeys(password);
-//}
-//    public void login() {
-//    provideEmail("tasiakwiggins@gmail.com");
-//    providePassword("te$t$udent");
-//    clickSubmitButton();
-//    }
 }
 
