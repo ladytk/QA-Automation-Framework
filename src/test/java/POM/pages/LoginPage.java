@@ -8,12 +8,12 @@ import java.time.Duration;
 
 public class LoginPage extends BasePage{
     @FindBy(css = "[type='email']")
-    WebElement emailField;
+    private WebElement emailField;
     @FindBy(css = "[type='password']")
-    WebElement passwordField;
+    private WebElement passwordField;
 
     @FindBy(css = "[type='submit']")
-    WebElement submitButtonLocator;
+    private WebElement submitButtonLocator;
 
     public LoginPage( WebDriver givenDriver ) {
         super(givenDriver);

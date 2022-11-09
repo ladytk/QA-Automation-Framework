@@ -7,13 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 public class BasePage {
-    WebDriver driver;
-    WebDriverWait wait;
-    Actions actions;
 
-    By avatarLocator = By.cssSelector("img[alt='Avatar of Abdi']");
-    By soundBarPlayLocator = By.cssSelector("[data-testid='sound-bar-play']");
-    By allSongsMenuItemLocator = By.cssSelector("li a.songs");
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected Actions actions;
+    private final By allSongsMenuItemLocator = By.cssSelector("li a.songs");
 
     public BasePage (WebDriver givenDriver){
 
@@ -22,19 +20,6 @@ public class BasePage {
         driver.get("https://bbb.testpro.io/");
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
-    }
-
-    public WebElement getUserAvatar () {
-        return driver.findElement(avatarLocator);
-    }
-
-    public boolean isUserAvatarDisplayed() {
-        return  driver.findElement(avatarLocator).isDisplayed();
-    }
-    public boolean isSongPlaying() {
-
-        WebElement soundBarVisualizer = driver.findElement(soundBarPlayLocator);
-        return soundBarVisualizer.isDisplayed();
     }
 
     public SongsPage clickOnAllSongs() {

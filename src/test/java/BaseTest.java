@@ -3,11 +3,18 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.time.Duration;
 
 public class BaseTest {
@@ -15,8 +22,6 @@ public class BaseTest {
     public static String url;
     public static WebDriverWait wait;
     public static Actions action;
-
-
 
     public static void browserConfigs() {
 
@@ -34,6 +39,45 @@ public class BaseTest {
                 {"d@clas.com", ""},
                 {"" , ""}
         };
+    }
+    @BeforeMethod
+    @Parameters({"BaseUrl"})
+    public void launchBrowser() throws MalformedURLException {
+
+        System.setProperty("webdriver.gecko.driver", "geckodriver");
+        driver = pickBrowser(System.getProperty("browser"));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        action = new Actions(driver);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+    }
+    private WebDriver pickBrowser(String browser) throws MalformedURLException {
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        String gridURL = "http://10.0.0.48:4444";
+
+        switch (browser){
+            case "firefox":
+                System.setProperty("webdriver.gecko.driver","geckodriver");
+                return driver = new FirefoxDriver();
+            case "safari":
+                return driver = new SafariDriver();
+            case "grid-firefox":
+                capabilities.setCapability("browserName" , "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+            case "grid-safari":
+                capabilities.setCapability("browserName" , "safari");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+            case "grid-chrome":
+                capabilities.setCapability("browserName" , "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+            default:
+                return driver = new ChromeDriver();
+        }
+    }
+    @AfterMethod
+    public static void tearDownBrowser() {
+        driver.quit();
+        driver = null;
     }
     protected static void playlistWasDeleted() {
 
@@ -66,14 +110,6 @@ public class BaseTest {
     }
     public static void chooseAllSongsList() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.songs"))).click();
-    }
-    @BeforeMethod
-    @Parameters({"BaseUrl"})
-    public void launchBrowser() {
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        url = "https://bbb.testpro.io/";
-        driver.get(url);
     }
     @BeforeSuite
     public static void chromeConfigs() {
@@ -184,11 +220,6 @@ public class BaseTest {
 
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions
                 .visibilityOf(webElementLocator));
-    }
-    @AfterMethod
-    public static void tearDownBrowser() {
-        driver.quit();
-        driver = null;
     }
 }
 

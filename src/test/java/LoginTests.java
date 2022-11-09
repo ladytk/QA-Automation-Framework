@@ -35,21 +35,22 @@ public class LoginTests extends BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         tearDownBrowser();
     }
-    @Test(enabled = true, priority = 1)
+    @Test(priority = 1)
     public static void LoginValidEmailPasswordTest () {
 
         LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
 
-        loginPage.provideEmail("dcabdi@gmail.com");
-        loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmitBtn();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        Assert.assertTrue(homePage.isUserAvatarDisplayed());
+        driver.manage().window().maximize();
+        loginPage.provideEmail("dcabdi@gmail.com")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
     }
-    @Test
+    @Test(enabled = false)
     public void PlayASongFromAllSongs() {
 
+        driver.manage().window().maximize();
         LoginPage loginpage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         SongsPage songsPage = new SongsPage(driver);
@@ -60,7 +61,7 @@ public class LoginTests extends BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         songsPage.doubleClickFirstSong();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-        Assert.assertTrue(homePage.isSongPlaying());
+        Assert.assertTrue(songsPage.isSongPlaying());
     }
 }
 
