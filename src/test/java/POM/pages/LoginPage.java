@@ -22,7 +22,7 @@ public class LoginPage extends BasePage{
             emailFieldLocator.sendKeys(email);
             return this;
         }
-        public LoginPage providePassword (String password){
+        public LoginPage providePassword(String password){
             passwordFieldLocator.sendKeys(password);
             return this;
         }
