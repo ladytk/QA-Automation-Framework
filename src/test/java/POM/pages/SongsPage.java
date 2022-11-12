@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class SongsPage extends BasePage{
     private final By shuffleBtnLocator = By.cssSelector(".btn-shuffle-all");
     private final By firstSongLocator = By.cssSelector(".play");
-    private final By soundBarPlayLocator = By.xpath("//button[@title='Click for a marvelous visualizer!']");
+    private final By soundBarPlayLocator = By.cssSelector("[data-testid = 'sound-bar-play']");
 
     private final By firstSong = By.cssSelector(".all-songs tr.song-item:nth-child(1)");
     public SongsPage(WebDriver givenDriver) {

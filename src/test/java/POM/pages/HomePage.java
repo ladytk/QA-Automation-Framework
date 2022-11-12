@@ -3,16 +3,26 @@ package POM.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 public class HomePage extends BasePage{
+    @FindBy(css = "img[alt='Avatar of Abdi']")
+    private WebElement avatarLocator;
+
+    @FindBy(css = "a.songs.active")
+    private WebElement buttonAllSongs;
+
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
-    private final By avatarLocator = By.cssSelector("img[alt='Avatar of Abdi']");
-    public WebElement getUserAvatar () {
-        return driver.findElement(avatarLocator);
-    }
+
     public boolean isUserAvatarDisplayed() {
-        return  driver.findElement(avatarLocator).isDisplayed();
+        return avatarLocator.isDisplayed();
+    }
+
+    public void clickButtonAllSongs() {
+        waitForVisibilityOfElement(buttonAllSongs);
+        buttonAllSongs.click();
     }
 }
 

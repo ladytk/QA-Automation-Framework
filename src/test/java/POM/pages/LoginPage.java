@@ -11,7 +11,6 @@ public class LoginPage extends BasePage{
     private WebElement emailField;
     @FindBy(css = "[type='password']")
     private WebElement passwordField;
-
     @FindBy(css = "[type='submit']")
     private WebElement submitButtonLocator;
 
@@ -37,5 +36,8 @@ public class LoginPage extends BasePage{
                 .providePassword("te$t$tudent")
                 .clickSubmitBtn();
         return new HomePage(driver);
+    }
+    public boolean isPageOpened() {
+        return driver.getCurrentUrl().contains("https://bbb.testpro.io");
     }
 }

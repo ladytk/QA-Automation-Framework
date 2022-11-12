@@ -38,29 +38,31 @@ public class LoginTests extends BaseTest {
     @Test(priority = 1)
     public static void LoginValidEmailPasswordTest () {
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
 
-        driver.manage().window().maximize();
+        getDriver().manage().window().maximize();
         loginPage.provideEmail("dcabdi@gmail.com")
                 .providePassword("te$t$tudent")
-                .clickSubmitBtn();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+                .clickSubmitBtn()
+                .isPageOpened();
+
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
     }
-    @Test(enabled = false)
+    @Test(priority = 2)
     public void PlayASongFromAllSongs() {
 
-        driver.manage().window().maximize();
-        LoginPage loginpage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        SongsPage songsPage = new SongsPage(driver);
+        getDriver().manage().window().maximize();
+        LoginPage loginpage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        SongsPage songsPage = new SongsPage(getDriver());
 
         loginpage.login();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         homePage.clickOnAllSongs();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         songsPage.doubleClickFirstSong();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         Assert.assertTrue(songsPage.isSongPlaying());
     }
 }
