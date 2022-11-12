@@ -24,8 +24,7 @@ public class BaseTest {
     public static WebDriverWait wait;
     public static Actions action;
     public static ThreadLocal<WebDriver> threadDriver;
-
-
+    
     public static void browserConfigs() {
 
         driver.get(url);

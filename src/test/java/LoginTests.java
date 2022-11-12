@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
-    @Test(enabled = false, priority = 0, description = "changing the username")
+    @Test(enabled = false)
     public void changeUsernameVerifyTheChange() throws InterruptedException {
 
         browserConfigs();
@@ -39,6 +39,7 @@ public class LoginTests extends BaseTest {
     public static void LoginValidEmailPasswordTest () {
 
         LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         getDriver().manage().window().maximize();
         loginPage.provideEmail("dcabdi@gmail.com")
