@@ -6,11 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage{
-    @FindBy(css = "img[alt='Avatar of Abdi']")
-    private WebElement avatarLocator;
+    @FindBy(css = "img.avatar")
+    WebElement avatarLocator;
 
     @FindBy(css = "a.songs.active")
-    private WebElement buttonAllSongs;
+    WebElement buttonAllSongs;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
