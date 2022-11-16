@@ -21,7 +21,6 @@ public class BasePage {
 
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        driver.get("https://bbb.testpro.io/");
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
@@ -29,7 +28,7 @@ public class BasePage {
         return driver.findElement(avatarLocator).isDisplayed();
     }
     public WebElement getUserAvatar(){
-        return driver.findElement(avatarLocator);
+        return wait.until(ExpectedConditions.elementToBeClickable(avatarLocator));
     }
     public SongsPage clickOnAllSongs() {
         driver.findElement(allSongsMenuItemLocator).click();
