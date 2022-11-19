@@ -21,9 +21,9 @@ public class Homework24 extends BaseTest{
 
         Assert.assertTrue(homePage.isUserAvatarDisplayed());
 
-        doubleclickPlaylist();
-        renamingPlaylist();
-        validateNewPlaylist();
+//        doubleclickPlaylist();
+//        renamingPlaylist();
+//        validateNewPlaylist();
 
     }
 
@@ -48,9 +48,3 @@ public class Homework24 extends BaseTest{
     }
 }
 
-//    Setup your Selenium Grid (Standalone option) locally. Chrome browser would be enough to get an idea.
-//        Implement Browser Factory method like we had in the class, so you can run Chrome browser using your local Grid.
-//        Create a new branch and commit your changes.
-//        Push your code to a remote repository.
-//        Create a pull request.
-//        Copy and paste the link of the pull request (or your branch) to the field below, so we can check your homework.
