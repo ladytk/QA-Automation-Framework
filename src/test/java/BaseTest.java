@@ -13,12 +13,15 @@ import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
 
 public class BaseTest {
     WebDriver driver;
     Actions actions;
     WebDriverWait wait;
+    ThreadLocal<WebDriver> threadDriver;
+
 
     @BeforeSuite
     public static void chromeConfigs() {
@@ -33,11 +36,38 @@ public class BaseTest {
 //        driver = new ChromeDriver();
 //        System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
 //        driver = new FirefoxDriver();
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("browserName", "chrome");
+        threadDriver = new ThreadLocal<>();
         driver = pickBrowser(System.getProperty("browser"));
-
+        threadDriver.set(driver);
         actions = new Actions(driver);
-        driver.get(baseURL);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().window().maximize();
+        getDriver().get(baseURL);
+    }
+    public WebDriver getDriver() {
+        return threadDriver.get();
+    }
+    public WebDriver lambdaTest() throws MalformedURLException {
+        String username = "tasiakwiggins";
+        String accessKey = "ZNnbFhf6rgESlHPGlvZcNSnEMrwcWD4Pi0vrdC8pawiCnjHqSP";
+        String hub = "@hub.lambdatest.com/wd/hub";
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("browserName", "Chrome");
+        caps.setCapability("version", "107.0");
+        caps.setCapability("platform", "Windows 11");
+        caps.setCapability("resolution","1024x768");
+        caps.setCapability("build", "First Test");
+        caps.setCapability("name", this.getClass().getName());
+        caps.setCapability("plugin", "git-testing");
+        caps.setCapability("network", true); // To enable network logs
+        caps.setCapability("visual", true); // To enable step by step screenshot
+        caps.setCapability("video", true); // To enable video recording
+        caps.setCapability("console", true); // To capture console logs
+        return new RemoteWebDriver(new URL("https://" + username + ":" + accessKey + hub), caps);
     }
     public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -58,6 +88,8 @@ public class BaseTest {
             case "grid-chrome":
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "cloud":
+                return lambdaTest();
             default:
                 return driver = new ChromeDriver();
 
@@ -66,7 +98,8 @@ public class BaseTest {
 
     @AfterMethod
     public void endSession () {
-
+        getDriver().quit();
+        threadDriver.remove();
         driver.quit();
     }
 }
