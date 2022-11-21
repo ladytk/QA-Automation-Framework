@@ -33,9 +33,6 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"baseURL"})
     public void launchBrowser(String baseURL) throws MalformedURLException {
-//        driver = new ChromeDriver();
-//        System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
-//        driver = new FirefoxDriver();
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("browserName", "chrome");
         threadDriver = new ThreadLocal<>();
@@ -100,7 +97,7 @@ public class BaseTest {
     public void endSession () {
         getDriver().quit();
         threadDriver.remove();
-        driver.quit();
+//        driver.quit();
     }
 }
 

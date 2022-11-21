@@ -9,9 +9,9 @@
             <class name="LoginTests"></class>
             <class name="PlaySong"></class>
             <class name="RenamePlaylist">
-<!--            <methods>-->
-<!--                <include name="renamePlaylist"/>-->
-<!--            </methods>-->
+            <methods>
+                <include name="renamePlaylist"/>
+            </methods>
         </class>
         </classes>
     </test>
