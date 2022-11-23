@@ -2,7 +2,7 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class Hw21 extends BaseTest {
+public class PlayingSongTests extends BaseTest {
 
     @Test(priority = 1, description = "Playing a Song & Validating")
     @Parameters({"BaseUrl"})

@@ -3,11 +3,11 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Hw20 extends BaseTest{
+public class DeletingPlaylistTest extends BaseTest{
 
     @Test(priority = 1, description = "Deleting A Playlist and Validating w/ Explicit Wait")
     @Parameters({"baseurl"})
-    public static void deletePlaylist() throws InterruptedException {
+    public static void deletePlaylist() {
 
         browserConfigs();
         clickSubmitBtn();

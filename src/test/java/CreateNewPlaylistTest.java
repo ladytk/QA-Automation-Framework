@@ -8,9 +8,9 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Hw16 {
+public class CreateNewPlaylistTest {
     @Test
-    public static void CreateNewPlaylist () throws InterruptedException{
+    public static void CreateNewPlaylist () {
 
         String url = " https://bbb.testpro.io/ ";
         WebDriver driver = new ChromeDriver();
@@ -27,14 +27,14 @@ public class Hw16 {
         WebElement loginButton= driver.findElement(By.cssSelector("button[type='submit']"));
 
         emailAddressField.sendKeys(email);
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         passwordField.sendKeys(password);
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         loginButton.click();
 
         WebElement createPlaylistButton = driver.findElement(By.xpath("//i[@title='Create a new playlist']"));
         createPlaylistButton.click();
-        Thread.sleep(4000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         WebElement newPlaylistButton = driver.findElement(By.xpath("//*[@id=\"playlists\"]/nav/ul/li[1]"));
         newPlaylistButton.click();
@@ -42,13 +42,13 @@ public class Hw16 {
         WebElement playlistFieldName = driver.findElement(By.xpath("//*[@id=\"playlists\"]/form/input"));
         playlistFieldName.sendKeys("Playlist1");
         playlistFieldName.sendKeys(Keys.RETURN);
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         WebElement firstPlaylistResult = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
         System.out.println(firstPlaylistResult.getText());
 
         Assert.assertTrue(firstPlaylistResult.isDisplayed());
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         driver.quit();
     }

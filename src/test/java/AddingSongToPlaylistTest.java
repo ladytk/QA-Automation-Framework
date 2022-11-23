@@ -1,21 +1,21 @@
 import org.testng.annotations.Test;
 
-public class Hw17 extends BaseTest {
+import java.time.Duration;
 
+public class AddingSongToPlaylistTest extends BaseTest {
     @Test(priority = 1,description = " Adding a song to Abdi's Playlist ")
-    public static void addSongToPlaylist() throws InterruptedException  {
+    public static void addSongToPlaylist() {
 
         browserConfigs();
         provideEmail("dcabdi@gmail.com");
         providePassword("te$t$tudent");
         clickSubmitBtn();
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         allSongsTab();
         addingNewSong();
         addSongToPlaylistBtn();
         abdisPlaylist();
         validation();
         tearDownBrowser();
-
     }
 }

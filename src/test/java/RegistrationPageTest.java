@@ -7,10 +7,9 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class hw14 extends BaseTest{
-
-    @Test(priority = 2)
-    public static void RegistrationPage () throws InterruptedException {
+public class RegistrationPageTest extends BaseTest{
+    @Test(priority = 1)
+    public static void RegistrationPage () {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         try {
@@ -22,7 +21,7 @@ public class hw14 extends BaseTest{
             WebElement registrationButton = driver.findElement(By.cssSelector("[id = 'button']"));
             Assert.assertTrue(registrationButton.isDisplayed());
         } finally {
-            Thread.sleep(5000);
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
             driver.quit();
         }
     }

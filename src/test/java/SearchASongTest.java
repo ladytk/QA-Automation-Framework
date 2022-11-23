@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Hw15 {
+public class SearchASongTest {
 
     @Test
     public static void SearchSong () throws InterruptedException {

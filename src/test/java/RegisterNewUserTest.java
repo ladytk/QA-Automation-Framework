@@ -8,26 +8,15 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 
-public class Homework14 {
-
-
-//    Using Selenium, Navigate to "https://bbb.testpro.io/"
-//    Click Registration link
-//    Validate that you are redirected to Registration page
-//    Create a new branch and commit your changes
-//    Push your code to a remote repository
-//    Create a pull request
-//    Copy and paste the link of the pull request (or your branch) to the field below, so we can check your homework
+public class RegisterNewUserTest {
 
     @Test
-    public static void Homework14Solution () throws InterruptedException {
+    public static void NewUserAccount () {
 
         String url = "https://bbb.testpro.io/";
         String registrationURL = "https://bbb.testpro.io/registration.php";
 
-
         WebDriver driver = new ChromeDriver();
-
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(url);
         driver.manage().window().maximize();
@@ -36,9 +25,9 @@ public class Homework14 {
         WebElement registrationLinkElement = driver.findElement(By.id("hel"));
 //        WebElement textToGetUsingCssSelector = driver.findElement(By.cssSelector("font[color='#f9f9ff']"));
 
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         registrationLinkElement.click();
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
 //        first approach - assert if the current url is equal to your stored (String)  registration page url
         Assert.assertEquals(driver.getCurrentUrl(), registrationURL);
@@ -55,8 +44,7 @@ public class Homework14 {
         driver.quit();
     }
 
-
-    }
+}
 
 
 
