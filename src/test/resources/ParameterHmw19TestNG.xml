@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestNG">
+
+    <test name="Example Test" preserve-order="false">
+        <classes>
+            <class name="homeworks.MyLoginTests"/>
+
+    <parameter name="baseURL" value="https://bbb.testpro.io" />
+
+            <class name="homeworks.MyBaseTest"/>
+
+            <class name="homeworks.PlaySongHmw18">
+                <methods>
+                    <include name="playASong" />
+                </methods>
+
+            </class>
+        </classes>
+    </test>
+</suite>
+
+
+<!--<class name="RegistrationTests"/>-->
+<!--<class name="ChangeUsernameTests"/>-->
+
+
+<!--Notes:-->
+<!--since our homework files are now in homeworks package, we just need to add the-->
+<!--homeworks.(homework name) in our test NG, sample: homeworks.PlaySongHmw18-->
+
+<!--Lets try to check our build.gradle when we encounter no tests found even-->
+<!--if test ng is configured correctly-->
+
+
+        <!--                <class name="MyBaseTest"/>-->
+        <!--&lt;!&ndash;                <class name="LoginTests"/>&ndash;&gt;-->
+        <!--                <class name="ChangeUserNameProfile"/>-->
+        <!--                <class name="PlaylistTests">-->
+
+        <!--                </class>-->
+        <!--            <class name="LoginTests">-->
+        <!--                <methods>-->
+        <!--                    <include name="LoginValidEmailEmptyPasswordTest" />-->
+        <!--                </methods>-->
+        <!--            </class>-->
+        <!--            <class name="MyBaseTest"/>-->
+        <!--            <class name="LoginTests"/>-->
+        <!--            <class name="Homework17"/>-->
+        <!--            <class name="ChangeUserNameProfile"/>-->
+        <!--                <class name="PlaylistTests"/>-->
+        <!--            lets remove this duplicate declarations of classes-->
+

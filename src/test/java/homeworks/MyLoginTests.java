@@ -3,6 +3,13 @@ package homeworks;
 import POM.pages.AllSongsPage;
 import POM.pages.HomePage;
 import POM.pages.LoginPage;
+<<<<<<< Updated upstream
+=======
+import homeworks.POM.Pages.AllSongsPageHmw;
+import homeworks.POM.Pages.BasePageHmw;
+import homeworks.POM.Pages.HomePageHmw;
+import homeworks.POM.Pages.LoginPageHmw;
+>>>>>>> Stashed changes
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +22,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class MyLoginTests extends MyBaseTest {
+<<<<<<< Updated upstream
 String url= "https://bbb.testpro.io/";
 
 //    @DataProvider
@@ -26,6 +34,14 @@ String url= "https://bbb.testpro.io/";
     @Test( enabled = false, priority = 0,dataProvider = "invalidCredentials")
     public void LoginEmptyEmailPasswordTest () {
         Assert.assertEquals(driver.getCurrentUrl(), url);
+=======
+    String expectedResultUrl= "https://bbb.testpro.io/";
+
+    @Test( enabled = false, priority = 0,dataProvider = "invalidCredentials")
+    public void LoginEmptyEmailPasswordTest () {
+        clickSubmitBtn();
+        Assert.assertEquals(driver.getCurrentUrl(), expectedResultUrl);
+>>>>>>> Stashed changes
     }
     @DataProvider(name="inavildCredentials")
     public static Object[][] getCredentials(){
@@ -36,6 +52,7 @@ String url= "https://bbb.testpro.io/";
                 {"",""},
 
         };
+<<<<<<< Updated upstream
 }
 
 
@@ -102,6 +119,44 @@ String url= "https://bbb.testpro.io/";
 //        Assert.assertEquals(driver.getCurrentUrl(), url);
 //
 //    }
+=======
+    }
+    @Test (priority = 0)
+    public void LoginValidEmailPasswordTest () {
+        LoginPageHmw loginPageHmw= new LoginPageHmw(driver);
+        HomePageHmw homePageHmw =new HomePageHmw(driver);
+
+        loginPageHmw.provideEmail("abisola@yahoo.com");
+        loginPageHmw.providePassword("te$t$tudent");
+        loginPageHmw.clickSubmitButton();
+        Assert.assertTrue(homePageHmw.isUserAvatarDisplayed());
+    }
+    @Test
+    public void Shuffle(){
+        AllSongsPageHmw allSongsPageHmw = new AllSongsPageHmw(driver);
+        LoginPageHmw loginPageHmw = new LoginPageHmw(driver);
+        BasePageHmw basePageHmw = new BasePageHmw(driver);
+
+        loginPageHmw.login();
+        basePageHmw.clickOnAllSongs();
+        allSongsPageHmw.Shuffle();
+    }
+    @Test
+    public void PlayASongFromAllSongs(){
+        LoginPageHmw loginPageHmw =new LoginPageHmw(driver);
+        BasePageHmw basePageHmw = new BasePageHmw(driver);
+        HomePageHmw homePageHmw =new HomePageHmw(driver);
+        AllSongsPageHmw allSongsPageHmw= new AllSongsPageHmw(driver);
+
+        loginPageHmw.login();
+        basePageHmw.clickOnAllSongs();
+        allSongsPageHmw.clickFirstSong();
+        Assert.assertTrue(homePageHmw.isSongPlaying());
+
+
+
+    }
+>>>>>>> Stashed changes
 
     @Test(enabled = false)
     public void LoginValidEmailEmptyPasswordTest () {
@@ -179,11 +234,16 @@ String url= "https://bbb.testpro.io/";
         By allButtonSelector = By.className("btn-shuffle-all");
 
         emailField.click();
+<<<<<<< Updated upstream
         emailField.sendKeys("adenik@class.com");
+=======
+        emailField.sendKeys("abisola@class.com");
+>>>>>>> Stashed changes
         passwordField.click();
         passwordField.sendKeys("te$t$tudent");
         submitButton.click();
         Assert.assertTrue(driver.findElement(avatarSelector).isDisplayed());
+<<<<<<< Updated upstream
 //      WebElement songsMenu = driver.findElement(By.className("songs"));
 //       WebElement songsMenu = driver.findElement(songMenuSelector);
 
@@ -193,6 +253,8 @@ String url= "https://bbb.testpro.io/";
 //        Thread.sleep(5000);
 
 
+=======
+>>>>>>> Stashed changes
         url = "https://bbb.testpro.io/";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);

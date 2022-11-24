@@ -34,6 +34,8 @@ public class AllSongsPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playback"))).click();
     }
 
+
+
     //Shuffle
     //Add to Favorite
     //PlaySong
