@@ -10,9 +10,9 @@
             <class name="homeworks.MyLoginTests"/>
             <class name="homeworks.Homework19A"/>
             <class name="homeworks.RenamePlaylistHmw21"/>
-            <class name="homeworks.PlaySongHmw18">
+            <class name="homeworks.PlaySngClswk21">
                 <methods>
-                    <include name="playSong" />
+                    <include name="playASong" />
                 </methods>
             </class>
         </classes>

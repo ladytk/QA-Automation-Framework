@@ -1,36 +1,41 @@
 package homeworks.POM.Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.FindBy;
+
 
 public class LoginPageHmw extends BasePageHmw{
-By emailFieldLocator = By.cssSelector("[type='email']");
-By passwordFieldLocator = By.cssSelector("[type='password']");
-By submitButtonLocator = By.cssSelector("[type='submit']");
-
+@FindBy(css="[type='email']")
+        WebElement emailField;
+@FindBy (css="[type='password']")
+        WebElement passwordField;
+@FindBy (css="[type='submit']")
+WebElement submitButton;
 
 public LoginPageHmw(WebDriver givenDriver){
 
 super(givenDriver);
 }
-public void clickSubmitButton(){
- driver. findElement(submitButtonLocator).click();
+public LoginPageHmw provideEmail(String email){
+    emailField.sendKeys(email);
+    return this;
+    }
+    public LoginPageHmw providePassword(String password){
+    passwordField.sendKeys(password);
+    return this;
+    }
+public LoginPageHmw clickSubmitButton(){
+ submitButton.click();
+ return this;
 }
-public void provideEmail(String email){
- driver.findElement(emailFieldLocator).sendKeys(email);
+public  HomePageHmw login(){
+ provideEmail("abisola@yahoo.com")
+         .providePassword("te$t$tudent")
+         .clickSubmitButton();
+ return new HomePageHmw(driver);
+}
 
-}
-public void providePassword(String password){
- driver.findElement(passwordFieldLocator).sendKeys(password);
-}
-public void login(){
- provideEmail("abisola@yahoo.com");
- providePassword("te$t$tudent");
- clickSubmitButton();
-}
 }
 
 

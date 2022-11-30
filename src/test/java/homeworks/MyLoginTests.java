@@ -24,12 +24,6 @@ public class MyLoginTests extends MyBaseTest {
 
 String url= "https://bbb.testpro.io/";
 
-//    @DataProvider
-//    public static Object[][] invalidCredentials() {
-//        return new Object[][]{};
-//    }
-
-
     @Test( enabled = false, priority = 0,dataProvider = "invalidCredentials")
     public void LoginEmptyEmailPasswordTest () {
         Assert.assertEquals(driver.getCurrentUrl(), url);
@@ -65,11 +59,12 @@ String url= "https://bbb.testpro.io/";
     public void Shuffle(){
         AllSongsPageHmw allSongsPageHmw = new AllSongsPageHmw(driver);
         LoginPageHmw loginPageHmw = new LoginPageHmw(driver);
-        BasePageHmw basePageHmw = new BasePageHmw(driver);
+          HomePageHmw homePageHmw= loginPageHmw.login();
 
-        loginPageHmw.login();
-        basePageHmw.clickOnAllSongs();
-        allSongsPageHmw.Shuffle();
+      homePageHmw.clickOnAllSongs()
+                .shuffle();
+        Assert.assertTrue(homePageHmw.isSongPlaying());
+
     }
     @Test
     public void PlayASongFromAllSongs(){

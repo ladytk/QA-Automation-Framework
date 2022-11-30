@@ -8,6 +8,7 @@ import org.testng.Assert;
 public class HomePageHmw extends BasePageHmw {
     By avatarLocator = By.cssSelector("img.avatar");
     By soundBarPlayLocator =By.cssSelector("[data-testid='sound-bar-play']");
+    By playButton= By .cssSelector("[data-testid='play-btn']");
     public HomePageHmw(WebDriver sentDriver) {
         super(sentDriver);
     }

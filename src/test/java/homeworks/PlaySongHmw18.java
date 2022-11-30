@@ -56,7 +56,7 @@ public class PlaySongHmw18 extends MyBaseTest {
 
         }
     private void clickOnASong() {
-        WebElement clickOnASong = driver.findElement(By.xpath("//*[@id=\"songsWrapper\"]/div/div/div[1]/table/tr[1]/td[2]"));
+        WebElement clickOnASong = driver.findElement(By.xpath("//tr[@class=\"song-item selected\"]//td[@class=\"title\"]"));
         clickOnASong.click();
     }
 
