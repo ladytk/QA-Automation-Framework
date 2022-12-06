@@ -19,7 +19,7 @@ public class PlaySngClswk21 extends MyBaseTest {
         AllSongsPageHmw allSongsPageHmw= new AllSongsPageHmw(driver);
         HomePageHmw homePageHmw=new HomePageHmw(driver);
 
-        LoginPageHmw.login()
+        loginPageHmw.login()
         .clickOnAllSongs();
         allSongsPageHmw .contextClickFirstSong();
         allSongsPageHmw.playFromContextMenu();

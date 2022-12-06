@@ -36,15 +36,12 @@ String url= "https://bbb.testpro.io/";
                 {"invalid@class.com","invalidPass"},
                 {"d@class.com",""},
                 {"",""},
-
         };
 }
-
     public boolean isAvatarIconPresent() {
         WebElement avatarIconElement= driver.findElement(By.xpath("//img[contains(@alt,'Avatar of')]"));
         return avatarIconElement.isDisplayed();
     }
-
     @Test (priority = 0)
     public void LoginValidEmailPasswordTest () {
         LoginPageHmw loginPageHmw= new LoginPageHmw(driver);

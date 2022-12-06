@@ -15,6 +15,7 @@
                     <include name="playASong" />
                 </methods>
             </class>
+
         </classes>
     </test>
 </suite>
