@@ -1,9 +1,4 @@
 package homeworks;
-import POM.pages.AllSongsPage;
-import POM.pages.HomePage;
-import POM.pages.LoginPage;
-
-
 import homeworks.POM.Pages.AllSongsPageHmw;
 import homeworks.POM.Pages.BasePageHmw;
 import homeworks.POM.Pages.HomePageHmw;
@@ -24,11 +19,22 @@ public class MyLoginTests extends MyBaseTest {
 
 String url= "https://bbb.testpro.io/";
 
-    @Test( enabled = false, priority = 0,dataProvider = "invalidCredentials")
+    @Test( enabled = false, priority = 0)
     public void LoginEmptyEmailPasswordTest () {
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        LoginPageHmw loginPageHmw= new LoginPageHmw(getDriver());
 
+
+    loginPageHmw.provideEmail("");
+    loginPageHmw.providePassword("");
+    loginPageHmw.clickSubmitButton();
+    Assert.assertTrue(loginPageHmw.isPageOpened());
     }
+
+    @Test(enabled = false, priority = 0)
+    public void OpenLoginPageTest () {
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+    }
+
     @DataProvider(name="inavildCredentials")
     public static Object[][] getCredentials(){
 
@@ -38,21 +44,19 @@ String url= "https://bbb.testpro.io/";
                 {"",""},
         };
 }
-    public boolean isAvatarIconPresent() {
-        WebElement avatarIconElement= driver.findElement(By.xpath("//img[contains(@alt,'Avatar of')]"));
-        return avatarIconElement.isDisplayed();
-    }
+
+
     @Test (priority = 0)
     public void LoginValidEmailPasswordTest () {
-        LoginPageHmw loginPageHmw= new LoginPageHmw(driver);
-        HomePageHmw homePageHmw =new HomePageHmw(driver);
+        LoginPageHmw loginPageHmw= new LoginPageHmw(getDriver());
+        HomePageHmw homePageHmw =new HomePageHmw(getDriver());
 
         loginPageHmw.provideEmail("abisola@yahoo.com");
         loginPageHmw.providePassword("te$t$tudent");
         loginPageHmw.clickSubmitButton();
         Assert.assertTrue(homePageHmw.isUserAvatarDisplayed());
     }
-    @Test
+    @Test(enabled = false)
     public void Shuffle(){
         AllSongsPageHmw allSongsPageHmw = new AllSongsPageHmw(driver);
         LoginPageHmw loginPageHmw = new LoginPageHmw(driver);
