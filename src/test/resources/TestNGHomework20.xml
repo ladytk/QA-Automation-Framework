@@ -15,11 +15,12 @@
 <!--                    <include name="playASong" />-->
 <!--                </methods>-->
 <!--            </class>-->
-                        <class name="homeworks.MyLoginTests">
+            <class name="homeworks.MyLoginTests"/>
+
+
 <!--                            <methods>-->
 <!--                                <include name="LoginValidEmailPasswordTest"/>-->
 <!--                            </methods>-->
-                        </class>
         </classes>
     </test>
 </suite>
