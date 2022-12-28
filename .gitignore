@@ -17,3 +17,5 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+src/test/java/LoginTests.java
+src/test/java/homeworks/abisola_homework22sample.java

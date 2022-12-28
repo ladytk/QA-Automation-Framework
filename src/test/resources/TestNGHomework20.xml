@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="homeworks.TestNGHomework20" parallel="methods" thread-count="2">
+    <parameter name="baseURL" value="https://bbb.testpro.io" />
+
+    <test name="Example Test" preserve-order="false">
+        <classes>
+<!--           <class name ="homeworks.MyBaseTest"/>-->
+<!--            <class name="homeworks.MyLoginTests"/>-->
+<!--            <class name="homeworks.Homework19A"/>-->
+<!--            <class name="homeworks.RenamePlaylistHmw21"/>-->
+<!--            <class name="homeworks.PlaySngClswk21">-->
+<!--                <methods>-->
+<!--                    <include name="playASong" />-->
+<!--                </methods>-->
+<!--            </class>-->
+            <class name="homeworks.MyLoginTests"/>
+
+
+<!--                            <methods>-->
+<!--                                <include name="LoginValidEmailPasswordTest"/>-->
+<!--                            </methods>-->
+        </classes>
+    </test>
+</suite>
+
+
