@@ -1,7 +1,6 @@
 package homeworks;
 
 import homeworks.POM.Pages.AllSongsPageHmw;
-import homeworks.POM.Pages.BasePageHmw;
 import homeworks.POM.Pages.HomePageHmw;
 import homeworks.POM.Pages.LoginPageHmw;
 import org.openqa.selenium.By;
@@ -12,15 +11,15 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class PlaySngClswk21 extends MyBaseTest {
+public class MyPlaySongTest extends MyBaseTest {
     @Test
     public void playASong() {
         LoginPageHmw loginPageHmw= new LoginPageHmw(driver);
         AllSongsPageHmw allSongsPageHmw= new AllSongsPageHmw(driver);
-        HomePageHmw homePageHmw=new HomePageHmw(driver);
+//        HomePageHmw homePageHmw=new HomePageHmw(driver);
 
-        loginPageHmw.login()
-        .clickOnAllSongs();
+        loginPageHmw.login();
+        allSongsPageHmw.clickOnAllSongs();
         allSongsPageHmw .contextClickFirstSong();
         allSongsPageHmw.playFromContextMenu();
         Assert.assertTrue(allSongsPageHmw.isSongPlaying());

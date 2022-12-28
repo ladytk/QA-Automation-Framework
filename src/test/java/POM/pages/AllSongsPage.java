@@ -38,6 +38,6 @@ public class AllSongsPage extends BasePage{
 
     //Shuffle
     //Add to Favorite
-    //PlaySong
+    //MyPlaySongTest
     //SortByTitle
 }

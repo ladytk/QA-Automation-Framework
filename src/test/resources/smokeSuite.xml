@@ -10,8 +10,10 @@
                     <include name="LoginValidEmailValidPasswordTest" />
                 </methods>
             </class>
+            <class name="homeworks.MyPlaySongTest"/>
+            <class name="homeworks.MyRenamePlaylistTest"/>
+            <class name="homeworks.MyDeletePlaylistTest"/>
         </classes>
     </test>
-
 </suite>
 

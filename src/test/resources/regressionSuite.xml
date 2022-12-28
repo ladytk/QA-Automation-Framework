@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNG">
+<suite name="RegressionSuite">
 
-    <test name="Example Test" preserve-order="false">
+    <test name="RegressionTest" preserve-order="false">
         <classes>
-            <class name="homeworks.MyLoginTests" />
-<!--            <class name="RegistrationTests"/>-->
+            <class name="homeworks.MyLoginTests" >
+            <methods>
+                <include name="LoginValidEmailValidPasswordTest" />
+            </methods>
+            </class>
+            <class name="homeworks.MyPlaySongTest"/>
+            <class name="homeworks.MyRenamePlaylistTest"/>
+            <class name="homeworks.MyDeletePlaylistTest"/>
         </classes>
-    </test>
-</suite>
+        </test>
+    </suite>
+
 
 
